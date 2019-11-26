@@ -92,14 +92,16 @@ void update_state(void) {
 
   switch (e_state) {
     case STATE_RELEASED:
-      if (PB_PRESSED()) {
+//      if (PB_PRESSED()) 
+      {
         e_state = STATE_PRESSED;
         LED1 = !LED1;
       }
       break;
 
     case STATE_PRESSED:
-      if (PB_RELEASED()) {
+//      if (PB_RELEASED()) 
+    {
         e_state = STATE_RELEASED;
       }
       break;
@@ -108,7 +110,7 @@ void update_state(void) {
       ASSERT(0);
   }
 
-  print_state(e_state);
+  //print_state(e_state);
 }
 
 
