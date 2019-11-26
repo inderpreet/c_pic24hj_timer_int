@@ -71,6 +71,7 @@ const char* apsz_state_names[] = {
   "STATE_RELEASED",
 };
 
+const char values[]={3, 6, 9, 12, 15, 18, 21, 24, 27}; // size is 9
 // Provide a convenient function to print out the state.
 void print_state(state_t e_state) {
   // Force an initial print of the state
@@ -89,27 +90,12 @@ void print_state(state_t e_state) {
 // This function defines the state machine.
 void update_state(void) {
   static state_t e_state = STATE_RELEASED;
-
-  switch (e_state) {
-    case STATE_RELEASED:
-//      if (PB_PRESSED()) 
-      {
-        e_state = STATE_PRESSED;
+  static int i=0;
+  
         LED1 = !LED1;
-      }
-      break;
-
-    case STATE_PRESSED:
-//      if (PB_RELEASED()) 
-    {
-        e_state = STATE_RELEASED;
-      }
-      break;
-
-    default:
-      ASSERT(0);
-  }
-
+        PR3 = msToU16Ticks (values[i++], getTimerPrescale(T3CONbits)) - 1;
+        if ( i >= 8 )
+            i=0;
   //print_state(e_state);
 }
 
